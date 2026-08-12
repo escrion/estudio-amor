@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDO Prep - Programación de Software (Ciclo Técnico)</title>
+  <meta name="description" content="Simulador de quices y guías de estudio interactivas para Técnica Profesional en Procesos de Programación de Software - JDO Virtual.">
+  
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Iconos FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Configuración de PDF.js para lectura de documentos -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+</head>
+<body>
+
+  <!-- Encabezado de la Aplicación -->a
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" id="logo-home">
+        <div class="logo-badge">JDO</div>
+        <div class="logo-text">
+          Prep-Software
+          <span>Ciclo Técnico (Sem. 1-3)</span>
+        </div>
+      </a>
+      
+      <!-- Navegación por pestañas y configuración -->
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <!-- Indicador de Usuario Vinculado -->
+        <span id="header-user-badge" class="stat-lbl" style="display: none; color: var(--accent-cyan); font-weight: 600; font-size: 0.8rem; background: rgba(6, 182, 212, 0.08); padding: 0.4rem 0.8rem; border-radius: 20px; border: 1px solid rgba(6, 182, 212, 0.2);">
+          <i class="fa-solid fa-circle-user"></i> <span id="header-user-email"></span>
+        </span>
+
+        <nav class="nav-tabs">
+          <button class="tab-btn active" id="tab-dashboard">
+            <i class="fa-solid fa-chart-pie"></i> Inicio
+          </button>
+          <button class="tab-btn" id="tab-quiz">
+            <i class="fa-solid fa-graduation-cap"></i> Simulador
+          </button>
+          <button class="tab-btn" id="tab-guias">
+            <i class="fa-solid fa-book-open"></i> Guías de Estudio
+          </button>
+          <button class="tab-btn" id="tab-ai">
+            <i class="fa-solid fa-robot"></i> Asistente IA
+          </button>
+        </nav>
+        <button class="tab-btn" id="btn-open-settings" style="padding: 0.6rem 0.8rem; aspect-ratio: 1; display: flex; justify-content: center; align-items: center;" title="Configurar Licencia Gemini IA">
+          <i class="fa-solid fa-gear" style="margin: 0;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main>
+
+    <!-- ================= VISTA: DASHBOARD ================= -->
+    <section id="view-dashboard" class="view-section active">
+      <div class="glass-card hero-section">
+        <span class="hero-tag">Virtual • Practicas</span>
+        <h1 class="hero-title">Hola Tatis Domina la Ingeneria de Software</h1>
+        <p class="hero-subtitle">
+          Prepárate para superar con éxito tus Materias amor siempre te apollare.
+        </p>
+        
+        <div class="stats-banner">
+          <div class="stat-item">
+            <div class="stat-val" id="stats-total-answered">0</div>
+            <div class="stat-lbl">Preguntas Respondidas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val" id="stats-success-rate">0%</div>
+            <div class="stat-lbl">Aciertos Totales</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val" id="stats-saved-keys">No</div>
+            <div class="stat-lbl">Llave Gemini Guardada</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selector por Semestres -->
+      <div class="semester-selector-container">
+        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Malla Curricular por Semestres</h2>
+        <div class="semester-grid">
+          
+          <!-- Semestre 1 -->
+          <div class="glass-card semester-card sem-1" data-semester="1">
+            <div class="semester-num">Semestre 1</div>
+            <h3>Técnica Profesional I</h3>
+            <p>Bases lógicas, diagramación de procesos y primeros pasos en desarrollo de algoritmos estructurados.</p>
+            <div class="subject-list">
+              <div class="subject-badge">Algoritmo y Programación <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Lógica para Ingeniería <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Fundamentos de Programación <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Arquitectura del PC <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Informática y Convergencia Tec. <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+          </div>
+
+          <!-- Semestre 2 -->
+          <div class="glass-card semester-card sem-2" data-semester="2">
+            <div class="semester-num">Semestre 2</div>
+            <h3>Técnica Profesional II</h3>
+            <p>Paradigma de orientación a objetos básico, matemáticas aplicadas e infraestructura de telecomunicaciones.</p>
+            <div class="subject-list">
+              <div class="subject-badge">Programación Orientada a Objetos I <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Redes I <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Cálculo Diferencial <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+          </div>
+
+          <!-- Semestre 3 -->
+          <div class="glass-card semester-card sem-3" data-semester="3">
+            <div class="semester-num">Semestre 3</div>
+            <h3>Técnica Profesional III</h3>
+            <p>Desarrollo avanzado de software, manipulación de sistemas operativos e interfaces y análisis cuantitativo.</p>
+            <div class="subject-list">
+              <div class="subject-badge">Programación Orientada a Objetos II <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Mantenimiento de Sistemas Operativos / Móviles <i class="fa-solid fa-chevron-right"></i></div>
+              <div class="subject-badge">Razonamiento Cuantitativo <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VISTA: SIMULADOR DE QUIZ ================= -->
+    <section id="view-quiz" class="view-section">
+      
+      <!-- CONFIGURACIÓN DEL QUIZ -->
+      <div id="quiz-setup-container" class="glass-card quiz-setup">
+        <h2><i class="fa-solid fa-gears"></i> Configuración de la Evaluación</h2>
+        
+        <div class="form-group">
+          <label for="quiz-semester">Filtrar por Semestre</label>
+          <select id="quiz-semester" class="form-control">
+            <option value="all">Todos los Semestres</option>
+            <option value="1">Semestre 1 - Lógica y Bases</option>
+            <option value="2">Semestre 2 - POO I y Redes</option>
+            <option value="3">Semestre 3 - POO II y Sistemas</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quiz-subject">Materia Específica</label>
+          <select id="quiz-subject" class="form-control">
+            <option value="all">Todas las Materias</option>
+            <!-- Dinámico por JS -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Modo de Simulación</label>
+          <div class="mode-selector">
+            <div class="mode-card selected" id="mode-practica">
+              <input type="radio" name="quiz-mode" value="practica" checked>
+              <h4>Modo Práctica</h4>
+              <p>Revisión inmediata de respuestas con explicaciones académicas detalladas.</p>
+            </div>
+            <div class="mode-card" id="mode-simulacro">
+              <input type="radio" name="quiz-mode" value="simulacro">
+              <h4>Simulacro de Parcial</h4>
+              <p>Con temporizador estricto, sin pistas, y calificación final formal.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-start-quiz">
+          <i class="fa-solid fa-play"></i> Iniciar Cuestionario
+        </button>
+      </div>
+
+      <!-- INTERFAZ ACTIVA DEL QUIZ -->
+      <div id="quiz-active-container" class="glass-card quiz-active-interface" style="display: none;">
+        <div class="quiz-header">
+          <div>
+            <div class="quiz-subject-title" id="active-quiz-subject">Fundamentos de Programación</div>
+            <div class="stat-lbl" id="active-quiz-semester">Semestre 1</div>
+          </div>
+          <div class="quiz-meta">
+            <span id="active-quiz-question-counter">Pregunta 1 de 10</span>
+            <div class="quiz-timer" id="quiz-timer-box" style="display: none;">
+              <i class="fa-regular fa-clock"></i> <span id="quiz-time-left">00:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Progreso -->
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="quiz-progress-fill"></div>
+        </div>
+
+        <!-- Pregunta -->
+        <div class="question-container">
+          <h3 class="question-text" id="active-question-text">¿Cuál es el valor que imprime el siguiente pseudocódigo?</h3>
+          
+          <!-- Opciones de Respuesta -->
+          <div class="options-grid" id="active-options-grid">
+            <!-- Dinámico por JS -->
+          </div>
+
+          <!-- Explicación (Inicialmente Oculta en Modo Práctica) -->
+          <div class="explanation-card glass-card" id="active-explanation-card" style="display: none;">
+            <div class="explanation-title">
+              <i class="fa-solid fa-circle-info"></i> Explicación Académica
+            </div>
+            <div class="explanation-body" id="active-explanation-text">
+              Explicación de la pregunta seleccionada.
+            </div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="quiz-actions">
+          <button class="btn-primary btn-next" id="btn-next-question" style="display: none;">
+            Siguiente Pregunta <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- VISTA DE RESULTADOS -->
+      <div id="quiz-results-container" class="glass-card results-card" style="display: none;">
+        <h2><i class="fa-solid fa-square-poll-vertical"></i> Resultados de tu Evaluación</h2>
+        <div class="results-score" id="results-score-text">0 / 0</div>
+        <div class="results-percentage" id="results-percentage-text">Porcentaje de acierto: 0%</div>
+        
+        <div class="results-grid">
+          <div class="result-stat-box">
+            <div class="val" id="results-stat-time">0m 0s</div>
+            <div class="lbl">Tiempo Empleado</div>
+          </div>
+          <div class="result-stat-box">
+            <div class="val" id="results-stat-status">Reprobado</div>
+            <div class="lbl">Resultado Final</div>
+          </div>
+        </div>
+
+        <!-- Recomendaciones de Estudio -->
+        <div class="recommendations-list">
+          <h4><i class="fa-solid fa-lightbulb"></i> Recomendaciones para el examen real:</h4>
+          <div id="results-recommendations-box">
+            <!-- Dinámico por JS -->
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn-secondary" id="btn-results-retry"><i class="fa-solid fa-rotate-left"></i> Repetir</button>
+          <button class="btn-primary" id="btn-results-dashboard"><i class="fa-solid fa-house"></i> Ir al Inicio</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= VISTA: GUIAS DE ESTUDIO ================= -->
+    <section id="view-guias" class="view-section">
+      <div class="glass-card guias-container">
+        
+        <!-- Sidebar de Selección de Materias -->
+        <aside class="guias-sidebar">
+          <h3 class="stat-lbl">Materias Disponibles</h3>
+          
+          <button class="materia-select-btn active" data-subject="Lógica para Ingeniería">
+            Lógica para Ingeniería
+          </button>
+          <button class="materia-select-btn" data-subject="Algoritmo y Programación">
+            Algoritmo y Programación
+          </button>
+          <button class="materia-select-btn" data-subject="Fundamentos de Programación">
+            Fundamentos de Programación
+          </button>
+          <button class="materia-select-btn" data-subject="Arquitectura del PC">
+            Arquitectura del PC
+          </button>
+          <button class="materia-select-btn" data-subject="Informática y Convergencia Tecnológica">
+            Informática y Convergencia Tec.
+          </button>
+          <button class="materia-select-btn" data-subject="Programación Orientada a Objetos I">
+            POO I
+          </button>
+          <button class="materia-select-btn" data-subject="Redes I">
+            Redes I
+          </button>
+          <button class="materia-select-btn" data-subject="Cálculo Diferencial">
+            Cálculo Diferencial
+          </button>
+          <button class="materia-select-btn" data-subject="Programación Orientada a Objetos II">
+            POO II
+          </button>
+          <button class="materia-select-btn" data-subject="Mantenimiento de Sistemas Operativos / Móviles">
+            Sistemas Operativos / Móviles
+          </button>
+          <button class="materia-select-btn" data-subject="Razonamiento Cuantitativo">
+            Razonamiento Cuantitativo
+          </button>
+        </aside>
+
+        <!-- Contenido Temático Dinámico -->
+        <article class="guias-content">
+          <div id="guia-render-target">
+            <!-- Se inyecta la información de la guía desde JS -->
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= VISTA: ASISTENTE IA ================= -->
+    <section id="view-ai" class="view-section">
+      <div class="ai-assistant-grid">
+        
+        <!-- Tarjeta de Control / Carga -->
+        <div class="glass-card ai-setup-card">
+          <h2><i class="fa-solid fa-robot"></i> Asistente de Estudio con IA</h2>
+          <p class="hero-subtitle" style="text-align: left; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Sube un archivo PDF de lecturas CUN, apuntes de clase o enunciados de talleres. La IA los analizará, te entregará un resumen técnico estructurado y creará un quiz personalizado.
+          </p>
+
+          <!-- Banner API Key de Gemini -->
+          <div class="api-key-banner">
+            <p><strong>Configuración de API de Gemini</strong> (Tus datos quedan guardados solo en tu navegador):</p>
+            <div class="form-group" style="margin-bottom: 0;">
+              <input type="password" id="gemini-api-key" class="form-control" placeholder="Introduce tu Gemini API Key (ej. AIzaSy...)">
+              <span class="stat-lbl" style="display: block; margin-top: 0.4rem;">
+                ¿No tienes una llave? <a href="https://aistudio.google.com/" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">Consíguela gratis en Google AI Studio</a> o usa nuestro simulador Demo.
+              </span>
+            </div>
+          </div>
+
+          <!-- Zona de Carga de Archivos -->
+          <div class="upload-zone" id="drop-zone">
+            <input type="file" id="file-uploader" accept=".txt,.md,.pdf" style="display: none;">
+            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+            <p><strong>Arrastra y suelta tu archivo aquí</strong> o haz clic para seleccionar</p>
+            <span>Formatos aceptados: PDF, TXT, MD (Máx. 50MB)</span>
+          </div>
+
+          <!-- Información del Archivo Cargado -->
+          <div class="file-info-badge" id="loaded-file-info" style="display: none;">
+            <div>
+              <i class="fa-solid fa-file-pdf" style="color: var(--accent-rose); margin-right: 0.5rem;"></i>
+              <span id="loaded-file-name">documento.pdf</span>
+              <span class="stat-lbl" id="loaded-file-size" style="margin-left: 0.5rem;">(1.2 MB)</span>
+            </div>
+            <button class="formula-btn" style="padding: 0.2rem 0.5rem;" id="btn-clear-file"><i class="fa-solid fa-trash"></i></button>
+          </div>
+
+          <!-- Acción de Procesar -->
+          <button class="btn-primary" id="btn-process-ai" style="display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Analizar con IA y Generar Cuestionario
+          </button>
+        </div>
+
+        <!-- Tarjeta de Resultados de la IA -->
+        <div class="glass-card ai-output-card">
+          <div class="ai-output-header">
+            <div class="ai-output-tabs">
+              <button class="ai-output-tab active" id="tab-ai-summary">Resumen del Documento</button>
+              <button class="ai-output-tab" id="tab-ai-quiz">Cuestionario Generado (0)</button>
+            </div>
+          </div>
+
+          <!-- Cargador de Estado -->
+          <div class="ai-status-loader" id="ai-loader">
+            <div class="spinner"></div>
+            <h4 id="ai-loader-title">Extrayendo texto del PDF...</h4>
+            <p class="stat-lbl" id="ai-loader-subtitle">Esto puede demorar unos segundos dependiendo del tamaño</p>
+          </div>
+
+          <!-- Contenido Visualizado -->
+          <div class="ai-scrollable-content" id="ai-content-display">
+            <!-- Estado Vacío -->
+            <div class="ai-empty-state" id="ai-empty-view">
+              <i class="fa-solid fa-folder-open"></i>
+              <h3>Sin información analizada</h3>
+              <p class="stat-lbl">Sube un archivo y presiona analizar para ver el resumen y las preguntas creadas por el Asistente IA.</p>
+            </div>
+
+            <!-- Resumen Renderizado (Markdown simplificado por JS) -->
+            <div class="ai-markdown-summary" id="ai-summary-view" style="display: none;">
+              <!-- Dinámico por JS -->
+            </div>
+
+            <!-- Cuestionario Personalizado -->
+            <div class="ai-generated-quiz-view" id="ai-quiz-view" style="display: none;">
+              <button class="btn-primary" id="btn-load-ai-quiz" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));">
+                <i class="fa-solid fa-bolt"></i> Cargar estas preguntas en el Simulador
+              </button>
+              
+              <div class="ai-generated-quiz-list" id="ai-quiz-list-target">
+                <!-- Preguntas dinámicas -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer>
+    <p>© 2026 JDO Prep-Software. Diseñado para fines educativos Para mi querida Esposa Tatis </p>
+    <p class="stat-lbl"> Virtual • te quiero mucho y se que puedes .</p>
+  </footer>
+
+  <!-- Modal de Configuración Global -->
+  <div id="settings-modal" class="modal-overlay" style="display: none;">
+    <div class="glass-card modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-gear"></i> Configuración de Licencia IA</h3>
+        <button id="btn-close-settings" class="formula-btn" style="padding: 0.2rem 0.5rem;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+          Vincula tu correo de la CUN u otro correo licenciado e introduce tu clave de API de Gemini. 
+          <br><span style="font-size: 0.75rem; color: var(--text-muted);">
+            Si tu cuenta cuenta con Gemini Advanced o CUN Google Workspace, puedes iniciar sesión con ese correo en <a href="https://aistudio.google.com/" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">Google AI Studio</a> para generar tu API Key gratuita de desarrollo.
+          </span>
+        </p>
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label>Vinculación de Cuenta</label>
+          <button id="btn-google-login-trigger" class="btn-secondary" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 0.5rem; background: #fff; color: #3c4043; border: 1px solid #dadce0; font-weight: 600; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0;">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+            </svg>
+            Iniciar Sesión con Google
+          </button>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="modal-user-email">Correo Electrónico Vinculado</label>
+          <input type="email" id="modal-user-email" class="form-control" placeholder="ejemplo@cun.edu.co">
+        </div>
+        <div class="form-group">
+          <label for="modal-gemini-key">Gemini API Key (Llave de API)</label>
+          <input type="password" id="modal-gemini-key" class="form-control" placeholder="Introduce tu clave AIzaSy...">
+        </div>
+        <div id="settings-key-status" class="stat-lbl" style="margin-bottom: 1rem; display: none; color: var(--accent-emerald);">
+          <i class="fa-solid fa-circle-check"></i> Licencia y correo guardados en el navegador.
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; gap: 0.75rem;">
+        <button id="btn-save-settings" class="btn-primary" style="flex: 1; padding: 0.8rem;"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+        <button id="btn-clear-settings" class="btn-secondary" style="flex: 1; padding: 0.8rem;"><i class="fa-solid fa-trash-can"></i> Borrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Selector de Cuentas de Google Simulado -->
+  <div id="google-login-modal" class="modal-overlay" style="display: none; z-index: 2000;">
+    <div class="google-login-content">
+      <div id="google-loading-bar" class="google-loading-bar" style="display: none;">
+        <div class="google-loading-bar-fill"></div>
+      </div>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <svg viewBox="0 0 24 24" width="28" height="28" style="margin-bottom: 0.5rem;">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+        </svg>
+        <h3 style="color: #202124; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 1.3rem; font-weight: 500; margin-top: 0.25rem;">Elige una cuenta</h3>
+        <p style="color: #5f6368; font-size: 0.85rem; margin-top: 0.25rem; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">para continuar a CUN Prep-Software</p>
+      </div>
+
+      <!-- Vista de Lista de Cuentas -->
+      <div id="google-accounts-view">
+        <div id="google-accounts-list" style="display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto;">
+          <!-- Dinámico por JS -->
+        </div>
+        
+        <div style="border-top: 1px solid #dadce0; padding-top: 1rem; display: flex; justify-content: space-between; align-items: center; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+          <button id="btn-cancel-google" style="background: transparent; border: none; color: #1a73e8; font-weight: 600; cursor: pointer; font-size: 0.85rem; padding: 0.5rem;">Cancelar</button>
+          <button id="btn-add-google-account" style="background: transparent; border: none; color: #1a73e8; font-weight: 600; cursor: pointer; font-size: 0.85rem; padding: 0.5rem; display: flex; align-items: center; gap: 0.25rem;">
+            <i class="fa-solid fa-user-plus"></i> Usar otra cuenta
+          </button>
+        </div>
+      </div>
+
+      <!-- Vista de Agregar Nueva Cuenta -->
+      <div id="google-add-account-view" style="display: none; font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-align: left;">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="google-new-email" style="color: #202124; font-size: 0.85rem; display: block; margin-bottom: 0.4rem; font-weight: 500;">Correo electrónico o teléfono</label>
+          <input type="email" id="google-new-email" class="form-control" style="background: #fff; border: 1px solid #dadce0; color: #202124; padding: 0.75rem; border-radius: 4px; width: 100%;" placeholder="ejemplo@cun.edu.co" required>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <button id="btn-back-google-list" style="background: transparent; border: none; color: #1a73e8; font-weight: 600; cursor: pointer; font-size: 0.85rem; padding: 0.5rem;">Atrás</button>
+          <button id="btn-submit-google-login" class="btn-primary" style="background: #1a73e8; color: #fff; font-weight: 600; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer;">Siguiente</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Carga de la Base de Datos de Preguntas y Script de Lógica -->
+  <script src="questions.js"></script>
+  <script src="app.js?v=3" defer></script>
+</body>
+</html>
