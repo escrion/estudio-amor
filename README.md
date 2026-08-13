@@ -1,8 +1,8 @@
-# CUN Prep-Software: Simulador de Cuestionarios y Asistente de Estudio IA
+# JDO Prep-Software: Simulador de Cuestionarios y Asistente de Estudio IA
 
-Esta es una aplicación web interactiva, moderna y premium (estilo *Glassmorphism* en modo oscuro), diseñada específicamente para los estudiantes del ciclo de **Técnica Profesional en Procesos de Programación de Software y Tecnología** de la **CUN** (Semestres 1 a 3).
+Esta es una aplicación web interactiva, moderna y premium (estilo *Glassmorphism* en modo oscuro), diseñada específicamente para los estudiantes del ciclo de **Técnica Profesional en Procesos de Programación de Software y Tecnología** de la **JDO** (Semestres 1 a 3).
 
-La aplicación funciona como un simulador de exámenes (quices y parciales bajo la escala CUN 0.0-5.0), repositorio de guías de estudio interactivas (con generador de tablas de verdad y simulador de trazado de algoritmos), y un **Asistente de Estudio con Inteligencia Artificial** que genera resúmenes y cuestionarios personalizados a partir de archivos PDF.
+La aplicación funciona como un simulador de exámenes (quices y parciales bajo la escala JDO 0.0-5.0), repositorio de guías de estudio interactivas (con generador de tablas de verdad y simulador de trazado de algoritmos), y un **Asistente de Estudio con Inteligencia Artificial** que genera resúmenes y cuestionarios personalizados a partir de archivos PDF.
 
 ---
 
@@ -69,11 +69,11 @@ Para tener tu aplicación en la nube y acceder a ella desde cualquier PC, tablet
 ## 🔑 Cómo vincular tu Correo y obtener tu Licencia (API Key) de Gemini Gratis
 
 Para usar el **Asistente IA** con tus propios documentos PDF y apuntes utilizando tu correo:
-1. Si tu correo (personal o de la CUN) ya cuenta con una suscripción o licencia de Google Gemini, inicia sesión con ese correo en **[Google AI Studio](https://aistudio.google.com/)**.
+1. Si tu correo personal  ya cuenta con una suscripción o licencia de Google Gemini, inicia sesión con ese correo en **[Google AI Studio](https://aistudio.google.com/)**.
 2. Haz clic en el botón **Get API Key** (Obtener API Key).
 3. Crea una llave en un nuevo proyecto o selecciona uno existente.
 4. Copia la clave generada (suele empezar con `AIzaSy...`).
-5. En la aplicación CUN Prep, haz clic en el icono de engranaje **Configuración (⚙️)** en la esquina superior derecha.
+5. En la aplicación JDO Prep, haz clic en el icono de engranaje **Configuración (⚙️)** en la esquina superior derecha.
 6. Ingresa tu **Correo Electrónico Vinculado** (para identificar tu cuenta de usuario) e introduce la **Gemini API Key** generada.
 7. Haz clic en **Guardar**. Verás que en la cabecera aparece tu correo con un indicador verde indicando que tu cuenta está vinculada con la licencia activa.
 
